@@ -66,3 +66,13 @@
 
 # Embedded web-server pid file
 /.web-server-pid
+
+##############################
+## PHP Storm
+##############################
+out/
+.idea/
+.idea_modules/
+*.iml
+*.ipr
+*.iws
