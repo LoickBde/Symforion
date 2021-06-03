@@ -22,6 +22,12 @@ class Subject
      */
     private $name;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Teacher::class, inversedBy="subjects")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $teacher;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -35,6 +41,18 @@ class Subject
     public function setName(string $name): self
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function getTeacher(): ?Teacher
+    {
+        return $this->teacher;
+    }
+
+    public function setTeacher(?Teacher $teacher): self
+    {
+        $this->teacher = $teacher;
 
         return $this;
     }
