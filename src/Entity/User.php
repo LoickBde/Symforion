@@ -4,11 +4,17 @@ namespace App\Entity;
 
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\DiscriminatorColumn;
+use Doctrine\ORM\Mapping\DiscriminatorMap;
+use Doctrine\ORM\Mapping\InheritanceType;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @ORM\Table(name="`user`")
+ * @InheritanceType("SINGLE_TABLE")
+ * @DiscriminatorColumn(name="resource_type", type="string")
+ * @DiscriminatorMap({"user" = "User","student" = "Student", "teacher" = "Teacher"})
  */
 class User implements UserInterface
 {
