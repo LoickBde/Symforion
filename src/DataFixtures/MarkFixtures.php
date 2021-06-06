@@ -19,46 +19,21 @@ class MarkFixtures extends Fixture implements DependentFixtureInterface
         $subjectsName = ['Mathématiques', 'Mécanique', 'Algorithmie', 'SDA', 'Micro-informatique', 'Web'];
         $typeList = ['CT','CC'];
         $coeffList = [0.5,1,1.5,2,2.5,3,3.5,4];
-        $coeff = $coeffList[$faker->numberBetween(0,7)];
-        $type = $typeList[$faker->numberBetween(0,1)];
-        $subject = $subjectsName[$faker->numberBetween(0,5)];
-        for ($i = 0; $i < 40; $i++) {
-            $mark = new Mark();
-            $mark->setMark($faker->numberBetween(0,20));
-            $mark->setCoef($coeff);
-            $mark->setType($type);
-            $mark->setDescription($faker->sentence($nbWords = 6, $variableNbWords = true));
-            $mark->setSubject($this->getReference("subject_$subject"));
-            $mark->setStudent($this->getReference("student_$i"));
-            $manager->persist($mark);
+        for ($j =0; $j < 10;$j++){
+            $coeff = $coeffList[$faker->numberBetween(0,7)];
+            $type = $typeList[$faker->numberBetween(0,1)];
+            $subject = $subjectsName[$faker->numberBetween(0,5)];
+            for ($i = 0; $i < 40; $i++) {
+                $mark = new Mark();
+                $mark->setMark($faker->numberBetween(0,20));
+                $mark->setCoef($coeff);
+                $mark->setType($type);
+                $mark->setDescription($faker->sentence($nbWords = 6, $variableNbWords = true));
+                $mark->setSubject($this->getReference("subject_$subject"));
+                $mark->setStudent($this->getReference("student_$i"));
+                $manager->persist($mark);
+            }
         }
-        $coeff = $coeffList[$faker->numberBetween(0,7)];
-        $type = $typeList[$faker->numberBetween(0,1)];
-        $subject = $subjectsName[$faker->numberBetween(0,5)];
-        for ($i = 0; $i < 20; $i++) {
-            $mark = new Mark();
-            $mark->setMark($faker->numberBetween(0,20));
-            $mark->setCoef($coeff);
-            $mark->setType($type);
-            $mark->setDescription($faker->sentence($nbWords = 6, $variableNbWords = true));
-            $mark->setSubject($this->getReference("subject_$subject"));
-            $mark->setStudent($this->getReference("student_$i"));
-            $manager->persist($mark);
-        }
-        $coeff = $coeffList[$faker->numberBetween(0,7)];
-        $type = $typeList[$faker->numberBetween(0,1)];
-        $subject = $subjectsName[$faker->numberBetween(0,5)];
-        for ($i = 20; $i < 40; $i++) {
-            $mark = new Mark();
-            $mark->setMark($faker->numberBetween(0,20));
-            $mark->setCoef($coeff);
-            $mark->setType($type);
-            $mark->setDescription($faker->sentence($nbWords = 6, $variableNbWords = true));
-            $mark->setSubject($this->getReference("subject_$subject"));
-            $mark->setStudent($this->getReference("student_$i"));
-            $manager->persist($mark);
-        }
-
         $manager->flush();
     }
 
