@@ -19,6 +19,14 @@ class StudentRepository extends ServiceEntityRepository
         parent::__construct($registry, Student::class);
     }
 
+    public function findFirst() {
+        return $this->createQueryBuilder('student')
+            ->orderBy('student.firstname','ASC')
+            ->getQuery()
+            ->setMaxResults(1)
+            ->getArrayResult()
+            ;
+    }
     // /**
     //  * @return Student[] Returns an array of Student objects
     //  */

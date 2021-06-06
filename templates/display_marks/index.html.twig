@@ -6,15 +6,45 @@
 <style>
     .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
 </style>
 
 <div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    
+    <table>
+        <tr>
+            <th>Nom</th>
+            <th>note</th>
+            <th>coef</th>
+            <th>type</th>
+            <th>description</th>
+            <th>matière</th>
+        </tr>
+        {% for mark in marks %}
+            <tr>
+                <td>{{ mark.student.firstname }}</td>
+                <td>{{ mark.mark }}</td>
+                <td>{{ mark.coef }}</td>
+                <td>{{ mark.type }}</td>
+                <td>{{ mark.description }}</td>
+                <td>{{ mark.subject.name }}</td>
+            </tr>
+        {% endfor %}
+    </table>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'E:/Documents/Cours/Symfony/Symforion/src/Controller/DisplayMarksController.php'|file_link(0) }}">src/Controller/DisplayMarksController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'E:/Documents/Cours/Symfony/Symforion/templates/display_marks/index.html.twig'|file_link(0) }}">templates/display_marks/index.html.twig</a></code></li>
-    </ul>
 </div>
 {% endblock %}
