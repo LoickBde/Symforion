@@ -16,11 +16,10 @@ class TeacherFixtures extends Fixture implements DependentFixtureInterface
     {
         $faker = Factory::create();
 
-        $subjectsName = ['Mathématiques', 'Méacanique', 'Algorithmie', 'SDA', 'Micro-informatique', 'Web'];
-        $promoLE1 = $this->getReference("Promo_LE1");
-        $promoLE2 = $this->getReference("Promo_LE2");
+        $promoLE1 = $this->getReference("promo_LE1");
+        $promoLE2 = $this->getReference("promo_LE2");
 
-        for ($i = 0; $i < 5; $i++) {
+        for ($i = 0; $i < 6; $i++) {
             $teacher = new Teacher();
             $teacher->setEmail($faker->email);
             $teacher->setPassword("Prof123");
@@ -28,11 +27,10 @@ class TeacherFixtures extends Fixture implements DependentFixtureInterface
             $teacher->setFirstname($faker->firstName());
             $teacher->addPromo($promoLE1);
             $teacher->addPromo($promoLE2);
-            foreach ($subjectsName as $str){
-                $subject = $this->getReference("subject_$str");
-                $teacher->addSubject($subject);
-            }
+
             $manager->persist($teacher);
+            $this->addReference("teacher_$i", $teacher);
+
         }
 
         $manager->flush();
@@ -41,7 +39,7 @@ class TeacherFixtures extends Fixture implements DependentFixtureInterface
     public function getDependencies()
     {
         return [
-            Promo::class
+            PromoFixtures::class,
         ];
     }
 }
