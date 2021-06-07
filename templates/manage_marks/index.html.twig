@@ -17,22 +17,46 @@
         <li>Your template at <code><a href="{{ '/home/loick/LE4/Symfony/Symforion/templates/manage_marks/index.html.twig'|file_link(0) }}">templates/manage_marks/index.html.twig</a></code></li>
     </ul>
 
-    <select id="select-subject" class="form-select" aria-label="Default select example">
+    <select id="select-subject" class="form-select" >
         {% for subject in subjects %}
             <option value="{{ subject.id }}">{{ subject.name }}</option>
         {% endfor %}
     </select>
 
-    <select id="select-promo" class="form-select" aria-label="Default select example">
+    <select id="select-promo" class="form-select">
         {% for promo in promos %}
             <option value="{{ promo.id }}">{{ promo.name }}</option>
         {% endfor %}
     </select>
 
-    <select id="select-student" class="form-select" aria-label="Default select example">
-        <option value="" selected disabled hidden>Séléctionnez un élève ...</option>
+    <select id="select-student" class="form-select">
     </select>
 
+    <select id="select-type" class="form-select">
+        <option value="CB">CB</option>
+        <option value="CC">CC</option>
+    </select>
+
+    <div class="input-group">
+        <span class="input-group-text">Description</span>
+        <textarea class="form-control" aria-label="Description"></textarea>
+    </div>
+
+    <div class="input-group">
+        <span class="input-group-text">Note</span>
+        <input type="text" id="salary" name="salary" class="form-control" aria-label="Note"
+               oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');
+               if(this.value>20) this.value=20; if(this.value < 0) this.value=0;" />
+        <span class="input-group-text">/20</span>
+    </div>
+
+    <div class="input-group">
+        <span class="input-group-text">Coef.</span>
+        <input type="text" id="salary" name="salary" class="form-control" aria-label="Note"
+               oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"/>
+    </div>
+
+    <button type="button" class="btn btn-primary">Ajouter la note</button>
 </div>
 
 <script type="text/javascript" src="{{ asset('js/manageMarks.js') }}"></script>
