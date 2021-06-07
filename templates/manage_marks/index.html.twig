@@ -16,5 +16,18 @@
         <li>Your controller at <code><a href="{{ '/home/loick/LE4/Symfony/Symforion/src/Controller/ManageMarksController.php'|file_link(0) }}">src/Controller/ManageMarksController.php</a></code></li>
         <li>Your template at <code><a href="{{ '/home/loick/LE4/Symfony/Symforion/templates/manage_marks/index.html.twig'|file_link(0) }}">templates/manage_marks/index.html.twig</a></code></li>
     </ul>
+
+    <select id="select-promo" class="form-select" aria-label="Default select example">
+        {% for promo in promos %}
+            <option value="{{ promo.id }}">{{ promo.name }}</option>
+        {% endfor %}
+    </select>
+
+    <select id="select-student" class="form-select" aria-label="Default select example">
+        <option value="" selected disabled hidden>Séléctionnez un élève ...</option>
+    </select>
+
 </div>
+
+<script type="text/javascript" src="{{ asset('js/manageMarks.js') }}"></script>
 {% endblock %}
