@@ -1,3 +1,4 @@
+let selectSubject = $('#select-subject');
 let selectPromo = $('#select-promo');
 let selectStudent = $('#select-student');
 

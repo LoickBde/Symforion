@@ -17,6 +17,12 @@
         <li>Your template at <code><a href="{{ '/home/loick/LE4/Symfony/Symforion/templates/manage_marks/index.html.twig'|file_link(0) }}">templates/manage_marks/index.html.twig</a></code></li>
     </ul>
 
+    <select id="select-subject" class="form-select" aria-label="Default select example">
+        {% for subject in subjects %}
+            <option value="{{ subject.id }}">{{ subject.name }}</option>
+        {% endfor %}
+    </select>
+
     <select id="select-promo" class="form-select" aria-label="Default select example">
         {% for promo in promos %}
             <option value="{{ promo.id }}">{{ promo.name }}</option>
