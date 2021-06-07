@@ -21,7 +21,7 @@ class StudentFixtures extends Fixture  implements DependentFixtureInterface
         for ($i = 0; $i < 40; $i++) {
             $student = new Student();
             $student->setEmail($faker->email);
-            $student->setPassword("Eleve123");
+            $student->setPassword(password_hash("Eleve123",PASSWORD_BCRYPT));
             $student->setLastname($faker->name());
             $student->setFirstname($faker->firstName());
             $student->setPromo(($i%2 == 0) ? $promoLE1 : $promoLE2);
