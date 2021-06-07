@@ -22,6 +22,7 @@ security:
                 secret: '%kernel.secret%'
                 lifetime: 604800 # 1 week in seconds
                 path: /
+                secure: true
 
             form_login:
                 login_path: app_login
