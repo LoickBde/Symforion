@@ -2,11 +2,14 @@
 
 namespace App\Controller;
 
+use App\Entity\Mark;
+use App\Repository\MarkRepository;
 use App\Repository\PromoRepository;
 use App\Repository\StudentRepository;
 use App\Repository\SubjectRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -15,6 +18,7 @@ class ManageMarksController extends AbstractController
     private PromoRepository $promoRepository;
     private StudentRepository $studentRepository;
     private SubjectRepository $subjectRepository;
+    private MarkRepository $markRepository;
 
     /**
      * ManageMarksController constructor.
@@ -22,11 +26,12 @@ class ManageMarksController extends AbstractController
      * @param StudentRepository $studentRepository
      */
     public function __construct(PromoRepository $promoRepository, StudentRepository $studentRepository,
-                                SubjectRepository $subjectRepository)
+                                SubjectRepository $subjectRepository, MarkRepository $markRepository)
     {
         $this->promoRepository = $promoRepository;
         $this->studentRepository = $studentRepository;
         $this->subjectRepository = $subjectRepository;
+        $this->markRepository = $markRepository;
     }
 
     /**
@@ -47,5 +52,32 @@ class ManageMarksController extends AbstractController
     public function getStudents($id): JsonResponse
     {
         return new JsonResponse($this->studentRepository->findStudentsByPromo($id));
+    }
+
+    /**
+     * @Route("/manage/marks/add", name="add_mark")
+     */
+    public function addMark(Request $request): Response
+    {
+        $studentId =  $request->get('studentId');
+        $subjectId =  $request->get('subjectId');
+        $markType =  $request->get('markType');
+        $markValue =  $request->get('markValue');
+        $markCoef =  $request->get('markCoef');
+        $markDesc =  $request->get('markDesc');
+
+        $newMark = new Mark();
+        $newMark->setStudent($this->studentRepository->find($studentId));
+        $newMark->setSubject($this->subjectRepository->find($subjectId));
+        $newMark->setType($markType);
+        $newMark->setMark($markValue);
+        $newMark->setCoef($markCoef);
+        $newMark->setDescription($markDesc);
+
+        $manager = $this->getDoctrine()->getManager();
+        $manager->persist($newMark);
+        $manager->flush();
+
+        return new Response("mark added", Response::HTTP_OK);
     }
 }

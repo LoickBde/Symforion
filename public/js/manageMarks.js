@@ -126,16 +126,27 @@ function addNewMark(){
         'markType': markType,
         'markValue': markValue,
         'markCoef': markCoef,
-        'markDesc': markDesc,
+        'markDesc': markDesc === "" ? null : markDesc,
     }
 
-    console.log(markJson);
-
-    markInput.val("");
-    $("#select-student > option:selected")
-        .prop("selected", false)
-        .next()
-        .prop("selected", true);
+    $.ajax({
+        type: "POST",
+        url: '/manage/marks/add',
+        data: markJson,
+        success: function(response)
+        {
+            markInput.val("");
+            $("#select-student > option:selected")
+                .prop("selected", false)
+                .next()
+                .prop("selected", true);
+        },
+        error: function()
+        {
+            alert("Erreur lors de l'ajout d'une note.");
+            console.log(arguments);
+        }
+    })
 }
 
 /**
