@@ -66,24 +66,22 @@
                     <div class="col">
                         <div class="input-group">
                             <span class="input-group-text">Note (/20):</span>
-                            <input type="text" id="salary" name="salary" class="form-control" aria-label="Note"
-                                   oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');
-               if(this.value>20) this.value=20; if(this.value < 0) this.value=0;" />
+                            <input id="mark-input" type="text" class="form-control" aria-label="Note"
+                                   oninput="checkMarkInput()" />
                         </div>
                     </div>
                     <div class="col">
                         <div class="input-group">
                             <span class="input-group-text">Coef.</span>
-                            <input type="text" id="salary" name="salary" class="form-control" aria-label="Note"
-                                   oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');
-                       if(this.value < 0) this.value=1;"/>
+                            <input id="coef-input" type="text" class="form-control" aria-label="Note"
+                                   oninput="checkCoefInput()"/>
                         </div>
                     </div>
                 </div>
 
                 <div class="input-group mb-3">
                     <span class="input-group-text">Description</span>
-                    <textarea class="form-control" aria-label="Description"></textarea>
+                    <textarea id="desc-input" class="form-control" aria-label="Description"></textarea>
                 </div>
 
                 <div class="row mb-3">

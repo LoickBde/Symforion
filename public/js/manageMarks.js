@@ -1,6 +1,10 @@
 let selectSubject = $('#select-subject');
 let selectPromo = $('#select-promo');
 let selectStudent = $('#select-student');
+let selectType = $('#select-type');
+let markInput = $('#mark-input');
+let coefInput = $('#coef-input');
+let descInput = $('#desc-input');
 
 $('document').ready(function (){
     let idPromo = $(selectPromo, "option:selected" ).val();
@@ -39,3 +43,51 @@ function fetchStudentByPromo(promoId){
         }
     });
 }
+
+/**
+ * Vérifier si l'input note est OK
+ */
+function checkMarkInput(){
+    let markValue = markInput.val();
+
+    if(markValue.trim() === "")
+        return;
+
+    markValue = markValue.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');
+
+    if(markValue >20)
+        markValue=20;
+    if(markValue < 0)
+        markValue=0;
+
+    markInput.val(markValue);
+}
+
+/**
+ * Vérifier si l'input coef est OK
+ */
+function checkCoefInput(){
+    let coefValue = coefInput.val();
+
+    if(coefValue.trim() === "")
+        return;
+
+    coefValue = coefValue.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');
+
+    if(coefValue >20)
+        coefValue=20;
+    if(coefValue <= 0)
+        coefValue=1;
+
+    coefInput.val(coefValue);
+}
+
+/**
+ * Nettoyer les input du formulaire
+ */
+$("#btn-clear").click(function() {
+    selectType.val("CB").select();
+    markInput.val("");
+    coefInput.val("");
+    descInput.val("");
+});
