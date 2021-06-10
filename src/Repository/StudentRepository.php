@@ -24,7 +24,7 @@ class StudentRepository extends ServiceEntityRepository
             ->orderBy('student.firstname','ASC')
             ->getQuery()
             ->setMaxResults(1)
-            ->getArrayResult()
+            ->getResult()
             ;
     }
     // /**

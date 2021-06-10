@@ -12,12 +12,6 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Teacher extends User
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
-    private $id;
 
     /**
      * @ORM\ManyToMany(targetEntity=Promo::class)
@@ -37,7 +31,7 @@ class Teacher extends User
 
     public function getId(): ?int
     {
-        return $this->id;
+        return parent::getId();
     }
 
     /**

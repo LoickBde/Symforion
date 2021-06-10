@@ -13,13 +13,6 @@ use Doctrine\ORM\Mapping as ORM;
 class Student extends User
 {
     /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
-    private $id;
-
-    /**
      * @ORM\ManyToOne(targetEntity=Promo::class, inversedBy="students")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -37,7 +30,7 @@ class Student extends User
 
     public function getId(): ?int
     {
-        return $this->id;
+        return parent::getId();
     }
 
     public function getPromo(): ?Promo
