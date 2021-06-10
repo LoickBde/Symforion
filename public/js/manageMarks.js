@@ -6,9 +6,22 @@ let markInput = $('#mark-input');
 let coefInput = $('#coef-input');
 let descInput = $('#desc-input');
 
+/**
+ * Récupere les étudiants des que le document est ready
+ */
 $('document').ready(function (){
     let idPromo = $(selectPromo, "option:selected" ).val();
     fetchStudentByPromo(idPromo);
+});
+
+/**
+ * Listenner sur la touche entrée, pour aller plus vite a rentrer les notes
+ */
+$(document).keypress(function(event){
+    var keycode = (event.keyCode ? event.keyCode : event.which);
+    if(keycode == '13'){
+        addNewMark();
+    }
 });
 
 /**
@@ -57,7 +70,7 @@ function checkMarkInput(){
 
     if(markValue >20)
         markValue=20;
-    if(markValue < 0)
+    if(markValue <= 0)
         markValue=0;
 
     markInput.val(markValue);
@@ -74,8 +87,6 @@ function checkCoefInput(){
 
     coefValue = coefValue.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');
 
-    if(coefValue >20)
-        coefValue=20;
     if(coefValue <= 0)
         coefValue=1;
 
@@ -83,11 +94,56 @@ function checkCoefInput(){
 }
 
 /**
- * Nettoyer les input du formulaire
+ * Nettoyer les input du formulaire sur appui du bouton
  */
 $("#btn-clear").click(function() {
-    selectType.val("CB").select();
+    resetInputs();
+});
+
+/**
+ * Nettoyer les input du formulaire
+ */
+$("#btn-new-mark").click(function(setDisabled) {
+    addNewMark();
+});
+
+function addNewMark(){
+    let studentId =  $(selectStudent, "option:selected" ).val();
+    let subjectId = $(selectSubject, "option:selected").val();
+    let markType = $(selectType, "option:selected").val();
+    let markValue = markInput.val().trim();
+    let markCoef = coefInput.val().trim();
+    let markDesc = descInput.val().trim();
+
+    if(markCoef === "" || markValue === ""){
+        alert("Veuillez renseigner une note ET un coefficient.");
+        return;
+    }
+
+    let markJson = {
+        'studentId': studentId,
+        'subjectId': subjectId,
+        'markType': markType,
+        'markValue': markValue,
+        'markCoef': markCoef,
+        'markDesc': markDesc,
+    }
+
+    console.log(markJson);
+
+    markInput.val("");
+    $("#select-student > option:selected")
+        .prop("selected", false)
+        .next()
+        .prop("selected", true);
+}
+
+/**
+ * RAZ des inputs
+ */
+function resetInputs(){
+    selectSubject.val("CB").select();
     markInput.val("");
     coefInput.val("");
     descInput.val("");
-});
+}
