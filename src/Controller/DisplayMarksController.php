@@ -25,8 +25,7 @@ class DisplayMarksController extends AbstractController
      */
     public function index(): Response
     {
-        //$test = $this->getUser();
-        $student = $this->studentRepository->findFirst();
+        $student = $this->getUser();
         return $this->render('display_marks/index.html.twig', [
             'student' => $student,
             'controller_name' => 'DisplayMarksController',
