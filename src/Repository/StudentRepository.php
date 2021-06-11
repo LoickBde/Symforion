@@ -28,6 +28,15 @@ class StudentRepository extends ServiceEntityRepository
             ->getArrayResult();
     }
 
+    public function findFirst() {
+        return $this->createQueryBuilder('student')
+            ->orderBy('student.firstname','ASC')
+            ->getQuery()
+            ->setMaxResults(1)
+            ->getResult()
+            ;
+    }
+
     // /**
     //  * @return Student[] Returns an array of Student objects
     //  */
