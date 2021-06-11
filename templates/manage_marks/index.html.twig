@@ -5,8 +5,8 @@
 {% block body %}
 <style>
     .card {
-        margin: auto auto; /* Added */
-        float: none; /* Added */
+        margin: auto auto;
+        float: none;
     }
 
     .form-new-mark {
@@ -15,7 +15,7 @@
     }
 </style>
 
-    <h1>Bonjour Mr. Husson</h1>
+    <h1>Connecté en tant que {{ app.user.lastname }} {{ app.user.firstname }}</h1>
 
     <div class="form-new-mark">
 

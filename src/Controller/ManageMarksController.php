@@ -39,10 +39,11 @@ class ManageMarksController extends AbstractController
      */
     public function index(): Response
     {
+        $teacher = $this->getUser();
         return $this->render('manage_marks/index.html.twig', [
             'controller_name' => 'ManageMarksController',
-            'promos' => $this->promoRepository->findAll(),
-            'subjects' => $this->subjectRepository->findAll()
+            'promos' => $this->promoRepository->findby(array('teacher' => $teacher)),
+            'subjects' => $this->subjectRepository->findby(array('teacher' => $teacher))
         ]);
     }
 
