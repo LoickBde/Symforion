@@ -3,10 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\Mark;
+use App\Entity\Teacher;
 use App\Repository\MarkRepository;
 use App\Repository\PromoRepository;
 use App\Repository\StudentRepository;
 use App\Repository\SubjectRepository;
+use App\Repository\TeacherRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,23 +17,22 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ManageMarksController extends AbstractController
 {
-    private PromoRepository $promoRepository;
     private StudentRepository $studentRepository;
     private SubjectRepository $subjectRepository;
-    private MarkRepository $markRepository;
+    private TeacherRepository $teacherRepository;
 
     /**
      * ManageMarksController constructor.
-     * @param PromoRepository $promoRepository
      * @param StudentRepository $studentRepository
+     * @param SubjectRepository $subjectRepository
+     * @param TeacherRepository $teacherRepository
      */
-    public function __construct(PromoRepository $promoRepository, StudentRepository $studentRepository,
-                                SubjectRepository $subjectRepository, MarkRepository $markRepository)
+    public function __construct(StudentRepository $studentRepository, SubjectRepository $subjectRepository,
+                                TeacherRepository $teacherRepository)
     {
-        $this->promoRepository = $promoRepository;
         $this->studentRepository = $studentRepository;
         $this->subjectRepository = $subjectRepository;
-        $this->markRepository = $markRepository;
+        $this->teacherRepository = $teacherRepository;
     }
 
     /**
@@ -39,11 +40,12 @@ class ManageMarksController extends AbstractController
      */
     public function index(): Response
     {
-        $teacher = $this->getUser();
+        $user = $this->getUser();
+        $teacher = $this->teacherRepository->find($user->getId());
         return $this->render('manage_marks/index.html.twig', [
             'controller_name' => 'ManageMarksController',
-            'promos' => $this->promoRepository->findby(array('teacher' => $teacher)),
-            'subjects' => $this->subjectRepository->findby(array('teacher' => $teacher))
+            'promos' => $teacher->getPromos(),
+            'subjects' => $teacher->getSubjects()
         ]);
     }
 

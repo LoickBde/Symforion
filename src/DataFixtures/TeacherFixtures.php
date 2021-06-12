@@ -22,7 +22,7 @@ class TeacherFixtures extends Fixture implements DependentFixtureInterface
         for ($i = 0; $i < 6; $i++) {
             $teacher = new Teacher();
             $teacher->setEmail($faker->email);
-            $teacher->setPassword("Prof123");
+            $teacher->setPassword(password_hash("Prof123",PASSWORD_BCRYPT));
             $teacher->setLastname($faker->name());
             $teacher->setFirstname($faker->firstName());
             $teacher->addPromo($promoLE1);

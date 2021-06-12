@@ -3,19 +3,13 @@
 {% block title %}Hello ManageMarksController!{% endblock %}
 
 {% block body %}
-<style>
-    .card {
-        margin: auto auto;
-        float: none;
-    }
 
-    .form-new-mark {
-        width: 100%;
-        height: available;
-    }
-</style>
+{% block stylesheets %}
+    <link href="{{ asset('css/manageMarks.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
+{% endblock %}
 
-    <h1>Connecté en tant que {{ app.user.lastname }} {{ app.user.firstname }}</h1>
+    <h2 class="text-center mb-5 mt-5">Bonjour {{ app.user.lastname }} {{ app.user.firstname }}.</h2>
 
     <div class="form-new-mark">
 
@@ -86,11 +80,11 @@
 
                 <div class="row mb-3">
                     <div class="col-4 offset-1">
-                        <button type="button" id='btn-clear' class="btn btn-secondary">Effacer les champs</button>
+                        <button type="button" id='btn-clear' class="btn btn-outline-secondary rounded-pill">Effacer les champs</button>
                     </div>
 
                     <div class="col-4 offset-3">
-                        <button type="button" id='btn-new-mark' class="btn btn-primary">Ajouter la note</button>
+                        <button type="button" id='btn-new-mark' class="btn btn-outline-salmon rounded-pill">Ajouter la note</button>
                     </div>
                 </div>
 
