@@ -1,13 +1,12 @@
 <nav class="navbar navbar-light bg-light">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">
-
-            <img src="{{ asset("img/logo_salmon.svg") }}" alt="" width="30" height="24" class="d-inline-block align-text-top">
-
+        <a class="navbar-brand" href=" {{ url('home') }}">
+            <img src="{{ asset('img/logo_salmon.svg') }}" alt="" width="30" height="24" class="d-inline-block align-text-top">
             Symforion
         </a>
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="{{ url('manage_marks') }}">Gérer les notes</a>
                 <a class="nav-link" aria-current="page" href="{{ url('display_marks') }}">Afficher mes notes</a>
             </li>
         </ul>

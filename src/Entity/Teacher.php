@@ -12,7 +12,6 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Teacher extends User
 {
-
     /**
      * @ORM\ManyToMany(targetEntity=Promo::class)
      */
