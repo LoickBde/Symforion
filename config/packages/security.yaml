@@ -46,4 +46,6 @@ security:
     access_control:
         - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY}
+        - { path: ^/manage, roles: ROLE_TEACHER }
+        - { path: ^/display, roles: ROLE_STUDENT }
         - { path: ^/, roles: ROLE_USER }
