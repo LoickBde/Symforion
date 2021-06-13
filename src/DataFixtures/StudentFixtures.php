@@ -25,6 +25,7 @@ class StudentFixtures extends Fixture  implements DependentFixtureInterface
             $student->setLastname($faker->name());
             $student->setFirstname($faker->firstName());
             $student->setPromo(($i%2 == 0) ? $promoLE1 : $promoLE2);
+            $student->setRoles(["ROLE_USER","ROLE_STUDENT"]);
             $manager->persist($student);
             $this->addReference("student_$i",$student);
         }

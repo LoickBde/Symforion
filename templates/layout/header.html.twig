@@ -4,5 +4,11 @@
             <img src="{{ asset("img/logo_salmon.svg") }}" alt="" width="30" height="24" class="d-inline-block align-text-top">
             Symforion
         </a>
+
+        {% if app.user %}
+            <span class="navbar-text">
+                {{ app.user.firstname }} {{ app.user.lastname }}
+            </span>
+        {% endif %}
     </div>
 </nav>
