@@ -26,7 +26,7 @@ php bin/console doctrine:migration:migrate;
 php bin/console doctrine:fixtures:load;
 ```
 
-##Fonctionnalités : 
+## Fonctionnalités : 
 * Saisie de notes du côté prof
 * Visualisation des notes côté élève
 * Génération automatique du bulletin en PDF
