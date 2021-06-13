@@ -19,6 +19,24 @@ class StudentRepository extends ServiceEntityRepository
         parent::__construct($registry, Student::class);
     }
 
+    public function findStudentsByPromo($promoId) {
+        return $this->createQueryBuilder('student')
+            ->andWhere("student.promo = :promoId")
+            ->setParameter('promoId', $promoId)
+            ->orderBy('student.lastname', 'ASC')
+            ->getQuery()
+            ->getArrayResult();
+    }
+
+    public function findFirst() {
+        return $this->createQueryBuilder('student')
+            ->orderBy('student.firstname','ASC')
+            ->getQuery()
+            ->setMaxResults(1)
+            ->getResult()
+            ;
+    }
+
     // /**
     //  * @return Student[] Returns an array of Student objects
     //  */
