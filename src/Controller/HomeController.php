@@ -17,12 +17,4 @@ class HomeController extends AbstractController
             'controller_name' => 'HomeController',
         ]);
     }
-
-    /**
-     * @Route("/home/{name}", name="home_name")
-     */
-    public function helloName($name): Response
-    {
-        return new Response('Hello '. $name);
-    }
 }

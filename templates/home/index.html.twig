@@ -1,20 +1,80 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Symforion - Home !{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <div class="container">
+        <div class="row mt-5">
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+            {% if is_granted('ROLE_STUDENT')  %}
+                <div class="col-md-3">
+                    <div class="card shadow">
+                        <div class="card-body ">
+                            <h4 class="card-title">Mes notes</h4>
+                            <p class="card-text">
+                                Accedez à l'ensemble de vos notes au cours de votre année.
+                            </p>
+                            <a href="/display/marks" class="btn btn-outline-salmon rounded-pill">Voir mes notes</a>
+                        </div>
+                    </div>
+                </div>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/home/loick/LE4/Symfony/Symforion/src/Controller/HomeController.php'|file_link(0) }}">src/Controller/HomeController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/home/loick/LE4/Symfony/Symforion/templates/home/index.html.twig'|file_link(0) }}">templates/home/index.html.twig</a></code></li>
-    </ul>
-</div>
+                <div class="col-md-3">
+                    <div class="card shadow">
+                        <div class="card-body ">
+                            <h4 class="card-title">Mes stats</h4>
+                            <p class="card-text">
+                                Accedez à un ensemble de statistique et suivez l'evolution de vos notes au cours de l'année
+                            </p>
+                            <a href="#" class="btn btn-outline-salmon rounded-pill">Voir les statistiques</a>
+                        </div>
+                    </div>
+                </div>
+
+            {% elseif is_granted("ROLE_TEACHER") %}
+
+                <div class="col-md-3">
+                    <div class="card shadow">
+                        <div class="card-body ">
+                            <h4 class="card-title">Ajouter une note</h4>
+                            <p class="card-text">
+                                Ajouter une nouvelle note à un ou plusieurs èleves dans la matière de votre choix
+                            </p>
+                            <a href="manage/marks" class="btn btn-outline-salmon rounded-pill">Ajouter une note</a>
+                        </div>
+                    </div>
+                </div>
+
+            {% elseif is_granted('ROLE_ADMIN') %}
+
+                <div class="col-md-2">
+                    <div class="card shadow">
+                        <i class="card-img-top bi bi-ul-list" alt="..."></i>
+                        <div class="card-body ">
+                            <h4 class="card-title">Mes stats</h4>
+                            <p class="card-text">
+                                Accedez à un ensemble de statistique et suivez l'evolution de vos notes au cours de l'année
+                            </p>
+                            <a href="" class="btn btn-outline-salmon rounded-pill">Voir les statistiques</a>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+                    <div class="card shadow">
+                        <div class="card-body ">
+                            <h4 class="card-title">Mes stats</h4>
+                            <p class="card-text">
+                                Accedez à un ensemble de statistique et suivez l'evolution de vos notes au cours de l'année
+                            </p>
+                            <a href="" class="btn btn-outline-salmon rounded-pill">Voir les statistiques</a>
+                        </div>
+                    </div>
+                </div>
+
+            {% endif %}
+
+        </div>
+    </div>
 {% endblock %}

@@ -76,3 +76,6 @@ out/
 *.iml
 *.ipr
 *.iws
+
+# project
+migrations/

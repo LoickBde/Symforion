@@ -27,6 +27,7 @@ class TeacherFixtures extends Fixture implements DependentFixtureInterface
             $teacher->setFirstname($faker->firstName());
             $teacher->addPromo($promoLE1);
             $teacher->addPromo($promoLE2);
+            $teacher->setRoles(["ROLE_USER","ROLE_TEACHER"]);
 
             $manager->persist($teacher);
             $this->addReference("teacher_$i", $teacher);
