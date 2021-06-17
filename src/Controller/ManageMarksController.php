@@ -42,7 +42,7 @@ class ManageMarksController extends AbstractController
     {
         $user = $this->getUser();
         $teacher = $this->teacherRepository->find($user->getId());
-        return $this->render('manage_marks/managePromo.html.twig', [
+        return $this->render('manage_marks/index.html.twig', [
             'controller_name' => 'ManageMarksController',
             'promos' => $teacher->getPromos(),
             'subjects' => $teacher->getSubjects()

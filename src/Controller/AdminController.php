@@ -6,6 +6,7 @@ use App\Repository\PromoRepository;
 use App\Service\PromoService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -20,7 +21,7 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/manage/promo", name="admin")
+     * @Route("/manage/promo", name="admin", methods={"GET"})
      */
     public function index(): Response
     {
@@ -36,6 +37,14 @@ class AdminController extends AbstractController
      */
     public function removePromo(PromoService $promoService, int $id): JsonResponse{
         return $promoService->removePromo($id);
+    }
+
+    /**
+     * @Route("/manage/promo", name="add_promo", methods={"POST"})
+     */
+    public function addPromo(PromoService $promoService,Request $request): JsonResponse{
+        $promoName = $request->get('promoName');
+        return $promoService->addPromo($promoName);
     }
 
 }

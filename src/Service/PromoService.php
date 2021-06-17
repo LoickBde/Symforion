@@ -27,6 +27,23 @@ class PromoService
             return new JsonResponse($promo,200);
         }
 
-        return new JsonResponse(array("message" => "Not found"),404);
+        return new JsonResponse(array("message" => "Promo introuvable"),404);
+    }
+
+    public function addPromo(string $promoName){
+
+        if(isset($promoName) || !is_null($promoName)){
+            $promo = new Promo();
+            $promo->setName($promoName);
+
+            $this->em->persist($promo);
+            $this->em->flush();
+            return new JsonResponse([
+                "id" => $promo->getId(),
+                "promoName" => $promo->getName()
+            ],200);
+        }
+
+        return new JsonResponse(array("message" => "Nom de promo incorrect"),400);
     }
 }
