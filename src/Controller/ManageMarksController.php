@@ -50,7 +50,7 @@ class ManageMarksController extends AbstractController
     }
 
     /**
-     * @Route("/manage/marks/promo/{id}/students", name="get_students")
+     * @Route("/manage/marks/promo/{id}/students", name="get_students", methods={"GET"})
      */
     public function getStudents($id): JsonResponse
     {
@@ -58,7 +58,7 @@ class ManageMarksController extends AbstractController
     }
 
     /**
-     * @Route("/manage/marks/add", name="add_mark")
+     * @Route("/manage/marks/add", name="add_mark", methods={"POST"})
      */
     public function addMark(Request $request): Response
     {
