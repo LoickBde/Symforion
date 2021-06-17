@@ -5,18 +5,17 @@
             Symforion
         </a>
         {% if app.user %}
-            {% if is_granted("ROLE_TEACHER") %}
               <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                   <li class="nav-item">
-                      <a class="nav-link" aria-current="page" href="{{ url('manage_marks') }}">Gérer les notes</a>
-                      <a class="nav-link" aria-current="page" href="{{ url('display_marks') }}">Afficher mes notes</a>
+                    {% if is_granted("ROLE_TEACHER") %} <a class="nav-link" aria-current="page" href="{{ url('manage_marks') }}">Ajouter une note</a>{% endif %}
+                    {% if is_granted("ROLE_STUDENT") %} <a class="nav-link" aria-current="page" href="{{ url('display_marks') }}">Afficher mes notes</a>{% endif %}
                   </li>
               </ul>
-            {% endif %}
         
 
             <span class="navbar-text">
                 {{ app.user.firstname }} {{ app.user.lastname }}
+                <a href="{{ url('app_logout') }}" class="ms-2"><button type="button" class="btn btn-outline-salmon rounded-pill">Déconnexion</button></a>
             </span>
         {% endif %}
     </div>

@@ -38,6 +38,7 @@ selectPromo.on('change', function() {
 function fetchStudentByPromo(promoId){
     $.ajax({
         url : '/manage/marks/promo/' + promoId + '/students',
+        methods:'GET',
         success : function(data, statut){
             selectStudent.find('option').remove();
             if(statut === 'success'){
@@ -48,11 +49,11 @@ function fetchStudentByPromo(promoId){
                         .text(student.lastname + " - " + student.firstname));
                 }
             } else {
-                alert("Une erreur est survenue lors de la récupération des élèves de cette promo");
+                $("#alert-container").append(createAlert("danger", "Une erreur est survenue lors de la récupération des élèves de cette promo.", "Erreur !"));
             }
         },
         error: function (xhr, ajaxOptions, thrownError) {
-            alert("Une erreur est survenue lors de la récupération des élèves de cette promo");
+            $("#alert-container").append(createAlert("danger", "Une erreur est survenue lors de la récupération des élèves de cette promo.", "Erreur !"));
         }
     });
 }
@@ -116,7 +117,7 @@ function addNewMark(){
     let markDesc = descInput.val().trim();
 
     if(markCoef === "" || markValue === ""){
-        alert("Veuillez renseigner une note ET un coefficient.");
+        $("#alert-container").append(createAlert("danger", "Veuillez renseigner une note ET un coefficient.", "Erreur !"));
         return;
     }
 
@@ -130,7 +131,7 @@ function addNewMark(){
     }
 
     $.ajax({
-        type: "POST",
+        method: 'POST',
         url: '/manage/marks/add',
         data: markJson,
         success: function(response)
@@ -143,7 +144,7 @@ function addNewMark(){
         },
         error: function()
         {
-            alert("Erreur lors de l'ajout d'une note.");
+            $("#alert-container").append(createAlert("danger", "Erreur lors de l'ajout d'une note.", "Erreur !"));
             console.log(arguments);
         }
     })
