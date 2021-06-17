@@ -1,0 +1,22 @@
+{# templates/bundles/TwigBundle/Exception/error404.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col-12">
+                <h1 style="color: #FFB1A3">
+                    <b>404</b>- Page not found
+                </h1>
+            </div>
+        </div>
+        <div class="row">
+            <p>
+                The requested page couldn't be located. Checkout for any URL
+                misspelling or <a href="{{ path('homepage') }}">return to the homepage</a>.
+            </p>
+        </div>
+    </div>
+
+
+{% endblock %}

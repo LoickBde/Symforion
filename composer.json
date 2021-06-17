@@ -36,7 +36,9 @@
         "symfony/serializer": "5.2.*",
         "symfony/string": "5.2.*",
         "symfony/translation": "5.2.*",
+        "symfony/twig-bridge": "5.2.*",
         "symfony/twig-bundle": "^5.2",
+        "symfony/twig-pack": "^1.0",
         "symfony/validator": "5.2.*",
         "symfony/web-link": "5.2.*",
         "symfony/yaml": "5.2.*",
@@ -90,7 +92,7 @@
         "deploy":[
             "@composer install",
             "@composer update",
-            "php bin/console doctrine:database:create",
+            "php bin/console doctrine:database:create --if-not-exists",
             "php bin/console doctrine:migration:diff",
             "php bin/console doctrine:migration:migrate",
             "php bin/console doctrine:fixtures:load"
