@@ -1,5 +1,5 @@
 function handleDeletePromo(event){
-    const promoId = event.target.value;
+    const promoId = $(this).val();
 
     console.log(promoId);
     $.ajax({
@@ -24,6 +24,8 @@ $(function () {
         fixedColumns: true
     });
 
+    $(document).on('click','.deletePromo',handleDeletePromo);
+
     $("#addPromoBtn").click(() => {
         const promoName = $("#promoName").val().trim();
 
@@ -37,7 +39,7 @@ $(function () {
                     promoTable.row.add([
                         data.id,
                         data.promoName,
-                        "<button type=\"button\" class=\"deletePromo btn btn-danger\" value=\""+data.id+ "\" onclick='handleDeletePromo(event)'><i class=\"bi bi-trash\"></i></button>"
+                        "<button type=\"button\" class=\"deletePromo btn btn-danger\" value=\""+data.id+ "\"><i class=\"bi bi-trash\"></i></button>"
                     ]).draw();
 
                     $("#alert-container").append(createAlert("success", `La promo ${promoName} a bien été ajoutée !`, `Succès !`));
