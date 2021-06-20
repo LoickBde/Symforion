@@ -13,6 +13,7 @@ Ensuite exectuter la commande :
 
 ```bash
 composer deploy
+php bin/console doctrine:fixtures:load;
 ```
 
 Ou
