@@ -3,11 +3,12 @@
 {% block title %}Symforion - Gestion des promos !{% endblock %}
 
 {% block stylesheets %}
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap5.min.css">
 {% endblock %}
 
 {% block javascripts %}
     <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap5.js"></script>
     <script src="{{ asset('js/managePromo.js') }}"></script>
 {% endblock %}
 
@@ -16,12 +17,30 @@
         <div class="row mt-5">
             <div class="col-12">
                 <div class="card shadow">
-                    <div class="card-body">
+                    <div class="card-header p-3">
                         <h4 class="card-title">Gestion des Promos</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12 mt-2">
+                                <h5>Ajouter une promo</h5>
+                            </div>
+                        </div>
 
-                        <div class="row mt-5">
-                            <div class="col-12">
-                                <table id="promoTable">
+                        <div class="row mt-2">
+                            <div class="col-10">
+                                <input type="text" class="form-control rounded-pill" id="promoName" placeholder="Nom de la promo" aria-label="name" >
+                            </div>
+
+                            <div class="col-2">
+                                <button type="button" id="addPromoBtn" class="btn btn-outline-salmon rounded-pill">Ajouter la promo</button>
+                            </div>
+                        </div>
+
+                        <div class="row mt-4">
+                            <h5>Liste des Promos</h5>
+                            <div class="col-12 mt-3">
+                                <table id="promoTable" class="table table-hover">
                                     <thead>
                                     <tr>
                                         <th>id</th>
@@ -36,7 +55,7 @@
                                             <td>{{ promo.id }}</td>
                                             <td>{{ promo.name }}</td>
                                             <td>
-                                                <button type="button" class="btn btn-danger" value="{{ promo.id }}"><i class="bi bi-trash"></i></button>
+                                                <button type="button" class="deletePromo btn btn-danger" value="{{ promo.id }}" ><i class="bi bi-trash"></i></button>
                                                 <input type="hidden" value="{{ promo.id }}">
                                             </td>
                                         </tr>
