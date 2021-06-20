@@ -19,7 +19,7 @@ class TeacherFixtures extends Fixture implements DependentFixtureInterface
         $promoLE1 = $this->getReference("promo_LE1");
         $promoLE2 = $this->getReference("promo_LE2");
 
-        for ($i = 0; $i < 6; $i++) {
+        for ($i = 0; $i < 5; $i++) {
             $teacher = new Teacher();
             $teacher->setEmail($faker->email);
             $teacher->setPassword(password_hash("Prof123",PASSWORD_BCRYPT));
@@ -33,7 +33,17 @@ class TeacherFixtures extends Fixture implements DependentFixtureInterface
             $this->addReference("teacher_$i", $teacher);
 
         }
+        $teacher = new Teacher();
+        $teacher->setEmail("prof@gmail.com");
+        $teacher->setPassword(password_hash("Prof123",PASSWORD_BCRYPT));
+        $teacher->setLastname($faker->name());
+        $teacher->setFirstname($faker->firstName());
+        $teacher->addPromo($promoLE1);
+        $teacher->addPromo($promoLE2);
+        $teacher->setRoles(["ROLE_USER","ROLE_TEACHER"]);
 
+        $manager->persist($teacher);
+        $this->addReference("teacher_5", $teacher);
         $manager->flush();
     }
 
