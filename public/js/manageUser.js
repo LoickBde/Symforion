@@ -15,6 +15,8 @@ function handleDeleteUser(event){
 }
 
 function handleAddUserSucces(data){
+    $('.modal').modal('hide')
+
     $('#userTable').DataTable().row.add([
         data.id,
         data.email,
@@ -24,7 +26,8 @@ function handleAddUserSucces(data){
         "<button type=\"button\" class=\"deleteuser btn btn-danger\" value=\""+data.id+ "\"><i class=\"bi bi-trash\"></i></button>"
     ]).draw();
 
-    $("#alert-container").append(createAlert("success", "L'utilisateur " + firstname + " " + lastname + " a bien été ajouté !", `Succès !`));
+    $("#alert-container").append(createAlert("success", "L'utilisateur " + data.firstname + " " + data.lastname + " a bien été ajouté !", `Succès !`));
+    console.log('coucou');
 }
 
 function generatePassword(){
@@ -83,9 +86,7 @@ $(function () {
         const password = $("#teacherPassword").val().trim();
         const firstname = $("#teacherFirstName").val().trim();
         const lastname = $("#teacherLastName").val().trim();
-        const subjects = $("#inputSubject").val();
         const promos = $("#inputPromoTeacher").val();
-
 
         if(email !== "" && password !== "" && firstname !== "" && lastname !== ""){
             $.post({
@@ -95,7 +96,6 @@ $(function () {
                     'password' : password,
                     'firstname' : firstname,
                     'lastname' : lastname,
-                    'subjects' : subjects,
                     'promos' : promos,
                     'roles' : [
                         "ROLE_USER",

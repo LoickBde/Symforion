@@ -51,17 +51,15 @@ class AdminController extends AbstractController
     {
         $users = $this->userRepository->findAll();
         $promos = $this->promoRepository->findAll();
-        $subjects = $this->subjectRepository->findAll();
 
         return $this->render('admin/manageUser.html.twig', [
             'users' => $users,
-            'promos' => $promos,
-            "subjects" => $subjects
+            'promos' => $promos
         ]);
     }
 
     /**
-     * @Route("/manage/subject", name="admin_user", methods={"GET"})
+     * @Route("/manage/subject", name="admin_subject", methods={"GET"})
      */
     public function manageSubject(): Response
     {

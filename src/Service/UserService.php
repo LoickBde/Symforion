@@ -65,13 +65,12 @@ class UserService
                 $role = "Eleve";
             } elseif (in_array("ROLE_TEACHER",$roles)){
                 $user = new Teacher();
-                $subjectsId = $request->get("subjects");
-                $subjects = $this->subjectRepository->findBy($subjectsId);
-                foreach ($subjects as $subject)
-                    $user->addSubject($subject);
 
                 $promosId = $request->get("promos");
-                $promos = $this->promoRepository->findBy($promosId);
+
+                dump($promosId);
+                $promos = $this->promoRepository->findBy(array('id' => $promosId));
+
                 foreach($promos as $promo)
                     $user->addPromo($promo);
 
