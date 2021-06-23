@@ -33,12 +33,12 @@ $(function () {
             $.post({
                 url: '/manage/promo',
                 data: {
-                    'promoName' : promoName
+                    'name' : promoName
                 },
                 success : (data) => {
                     promoTable.row.add([
                         data.id,
-                        data.promoName,
+                        data.name,
                         "<button type=\"button\" class=\"deletePromo btn btn-danger\" value=\""+data.id+ "\"><i class=\"bi bi-trash\"></i></button>"
                     ]).draw();
 

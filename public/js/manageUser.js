@@ -24,7 +24,7 @@ function handleAddUserSucces(data){
         "<button type=\"button\" class=\"deleteuser btn btn-danger\" value=\""+data.id+ "\"><i class=\"bi bi-trash\"></i></button>"
     ]).draw();
 
-    $("#alert-container").append(createAlert("success", `L'utilisateur ${firstname} ${lastname} a bien été ajouté !`, `Succès !`));
+    $("#alert-container").append(createAlert("success", "L'utilisateur " + firstname + " " + lastname + " a bien été ajouté !", `Succès !`));
 }
 
 function generatePassword(){
