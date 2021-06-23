@@ -79,7 +79,7 @@ class UserService
             }
 
             $user->setEmail($email);
-            $user->setPassword($password);
+            $user->setPassword(password_hash($password,PASSWORD_BCRYPT));
             $user->setFirstname($firstname);
             $user->setLastname($lastname);
             $user->setRoles($roles);
