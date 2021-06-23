@@ -110,4 +110,31 @@ $(function () {
         }
     });
 
+    $("#addAdminBtn").click(() => {
+        const email = $("#adminEmail").val().trim();
+        const password = $("#adminPassword").val().trim();
+        const firstname = $("#adminFirstName").val().trim();
+        const lastname = $("#adminLastName").val().trim();
+
+        if(email !== "" && password !== "" && firstname !== "" && lastname !== ""){
+            $.post({
+                url: '/manage/user',
+                data: {
+                    'email' : email,
+                    'password' : password,
+                    'firstname' : firstname,
+                    'lastname' : lastname,
+                    'roles' : [
+                        "ROLE_USER",
+                        "ROLE_ADMIN"
+                    ]
+                },
+                success : handleAddUserSucces,
+                error: (data) => {
+                    $("#alert-container").append(createAlert("danger", "Erreur lors de la création de l'utilisateur !" + data.message, `Erreur !`));
+                }
+            })
+        }
+    });
+
 });

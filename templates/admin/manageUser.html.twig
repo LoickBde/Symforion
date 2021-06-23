@@ -35,7 +35,7 @@
                                 <button type="button" id="displayTeacherModal" class="btn btn-outline-salmon rounded-pill dispModal" data-bs-toggle="modal" data-bs-target="#teacherModal">Ajouter un professeur</button>
                             </div>
                             <div class="col-3 d-grid mx-auto">
-                                <button type="button" class="btn btn-outline-salmon rounded-pill">Ajouter un administrateur</button>
+                                <button type="button" id="displayAdminModal" class="btn btn-outline-salmon rounded-pill dispModal" data-bs-toggle="modal" data-bs-target="#adminModal">Ajouter un administrateur</button>
                             </div>
                         </div>
 
@@ -133,7 +133,7 @@
     </div>
 
 
-    <!-- StudentModal -->
+    <!-- TeacherModal -->
     <div class="modal fade" id="teacherModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -173,6 +173,42 @@
                 <div class="modal-footer">
                     <button type="button" class="btn rounded-pill btn-outline-secondary" data-bs-dismiss="modal">Fermer</button>
                     <button type="button" class="btn rounded-pill btn-outline-salmon" id="addTeacherBtn">Ajouter le professeur</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TeacherModal -->
+    <div class="modal fade" id="adminModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Ajout d'un administrateur</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label for="adminEmail" class="form-label">Email</label>
+                            <input type="email" class="form-control emailInput" id="adminEmail" placeholder="jhondoe@gmail.com">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="adminPassword" class="form-label">Mot de passe</label>
+                            <input type="text" class="form-control disabled passwordInput" id="adminPassword" disabled>
+                        </div>
+                        <div class="col-12">
+                            <label for="adminFirstName" class="form-label">Prénom</label>
+                            <input type="text" class="form-control firstnameInput" id="adminFirstName" placeholder="Jhon">
+                        </div>
+                        <div class="col-12">
+                            <label for="adminLastName" class="form-label">Nom</label>
+                            <input type="text" class="form-control lastnameInput" id="adminLastName" placeholder="Doe">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn rounded-pill btn-outline-secondary" data-bs-dismiss="modal">Fermer</button>
+                    <button type="button" class="btn rounded-pill btn-outline-salmon" id="addAdminBtn">Ajouter l'administrateur</button>
                 </div>
             </div>
         </div>

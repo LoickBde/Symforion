@@ -67,14 +67,15 @@ class UserService
                 $user = new Teacher();
 
                 $promosId = $request->get("promos");
-
-                dump($promosId);
                 $promos = $this->promoRepository->findBy(array('id' => $promosId));
 
                 foreach($promos as $promo)
                     $user->addPromo($promo);
 
                 $role = "Professeur";
+            } elseif (in_array("ROLE_ADMIN",$roles)){
+                $user = new User();
+                $role = "Administrateur";
             }
 
             $user->setEmail($email);
