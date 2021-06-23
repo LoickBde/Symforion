@@ -40,7 +40,7 @@ class PromoService
             $this->em->flush();
             return new JsonResponse([
                 "id" => $promo->getId(),
-                "promoName" => $promo->getName()
+                "name" => $promo->getName()
             ],200);
         }
 

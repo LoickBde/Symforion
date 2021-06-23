@@ -1,0 +1,86 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Symforion - Gestion des promos !{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap5.min.css">
+{% endblock %}
+
+{% block javascripts %}
+    <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap5.js"></script>
+    <script src="{{ asset('js/manageSubject.js') }}"></script>
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col-12">
+                <div class="card shadow">
+                    <div class="card-header p-3">
+                        <h4 class="card-title">Gestion des Matières</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12 mt-2">
+                                <h5>Ajouter une metière</h5>
+                            </div>
+                        </div>
+
+                        <div class="row mt-2">
+                            <div class="col-5">
+                                <input type="text" class="form-control rounded-pill" id="subjectName" placeholder="Nom de la matière" aria-label="name" >
+                            </div>
+
+                            <div class="col-5">
+                                <select id="selectTeacher" class="form-select" >
+                                    {% for teacher in teachers %}
+                                        <option value="" selected>Choisir un professeur</option>
+                                        <option value="{{ teacher.id }}">{{ teacher.firstname }} {{ teacher.lastname }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+
+
+                            <div class="col-2">
+                                <button type="button" id="addSubjectBtn" class="btn btn-outline-salmon rounded-pill">Ajouter la matière</button>
+                            </div>
+                        </div>
+
+                        <div class="row mt-4">
+                            <h5>Liste des Matières</h5>
+                            <div class="col-12 mt-3">
+                                <table id="subjectTable" class="table table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th>id</th>
+                                        <th>Name</th>
+                                        <th>Teacher</th>
+                                        <th>Action</th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    {% for subject in subjects %}
+                                        <tr>
+                                            <td>{{ subject.id }}</td>
+                                            <td>{{ subject.name }}</td>
+                                            <td>{{ subject.teacher.firstname }} {{ subject.teacher.lastname }}</td>
+                                            <td>
+                                                <button type="button" class="deleteSubject btn btn-danger" value="{{ subject.id }}" ><i class="bi bi-trash"></i></button>
+                                                <input type="hidden" value="{{ subject.id }}">
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

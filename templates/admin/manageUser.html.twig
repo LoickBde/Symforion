@@ -1,0 +1,216 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Symforion - Gestion des utilisateurs !{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap5.min.css">
+{% endblock %}
+
+{% block javascripts %}
+    <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap5.js"></script>
+    <script src="{{ asset('js/manageUser.js') }}"></script>
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col-12">
+                <div class="card shadow">
+                    <div class="card-header p-3">
+                        <h4 class="card-title">Gestion des Utilisateurs</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12 mt-2">
+                                <h5>Ajouter un utilisateurs</h5>
+                            </div>
+                        </div>
+
+                        <div class="row mt-2">
+                            <div class="col-3 d-grid mx-auto">
+                                <button type="button" id="displayStudentModal" class="btn btn-outline-salmon rounded-pill dispModal" data-bs-toggle="modal" data-bs-target="#studentModal">Ajouter un eleve</button>
+                            </div>
+                            <div class="col-3 d-grid mx-auto">
+                                <button type="button" id="displayTeacherModal" class="btn btn-outline-salmon rounded-pill dispModal" data-bs-toggle="modal" data-bs-target="#teacherModal">Ajouter un professeur</button>
+                            </div>
+                            <div class="col-3 d-grid mx-auto">
+                                <button type="button" id="displayAdminModal" class="btn btn-outline-salmon rounded-pill dispModal" data-bs-toggle="modal" data-bs-target="#adminModal">Ajouter un administrateur</button>
+                            </div>
+                        </div>
+
+                        <div class="row mt-4">
+                            <h5>Liste des Utilisateurs</h5>
+                            <div class="col-12 mt-3">
+                                <table id="userTable" class="table table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Email</th>
+                                        <th>Prenom</th>
+                                        <th>Nom</th>
+                                        <th>Role</th>
+                                        <th>Action</th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    {% for user in users %}
+                                        <tr>
+                                            <td>{{ user.id }}</td>
+                                            <td>{{ user.email }}</td>
+                                            <td>{{ user.firstname }}</td>
+                                            <td>{{ user.lastname }}</td>
+                                            {% if "ROLE_STUDENT" in user.roles %}
+                                                <td>Élève</td>
+                                            {% elseif "ROLE_TEACHER" in user.roles %}
+                                                <td>Professeur</td>
+                                            {% elseif "ROLE_ADMIN" in user.roles %}
+                                                <td>Administrateur</td>
+                                            {% endif %}
+                                            <td>
+                                                <button type="button" class="deleteUser btn btn-danger" value="{{ user.id }}" ><i class="bi bi-trash"></i></button>
+                                                <input type="hidden" value="{{ user.id }}">
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- StudentModal -->
+    <div class="modal fade" id="studentModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Ajout d'un élève</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label for="studentEmail" class="form-label">Email</label>
+                            <input type="email" class="form-control emailInput" id="studentEmail" placeholder="jhondoe@gmail.com">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="studentPassword" class="form-label">Mot de passe</label>
+                            <input type="text" class="form-control disabled passwordInput" id="studentPassword" disabled>
+                        </div>
+                        <div class="col-12">
+                            <label for="studentFirstName" class="form-label">Prénom</label>
+                            <input type="text" class="form-control firstnameInput" id="studentFirstName" placeholder="Jhon">
+                        </div>
+                        <div class="col-12">
+                            <label for="studentLastName" class="form-label">Nom</label>
+                            <input type="text" class="form-control lastnameInput" id="studentLastName" placeholder="Doe">
+                        </div>
+
+                        <div class="col-12">
+                            <label for="inputPromo" class="form-label">Promo</label>
+                            <select id="inputPromo" class="form-select">
+                                {% for promo in promos %}
+                                    <option value="{{ promo.id }}">{{ promo.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn rounded-pill btn-outline-secondary" data-bs-dismiss="modal">Fermer</button>
+                    <button type="button" class="btn rounded-pill btn-outline-salmon" id="addStudentBtn">Ajouter l'élève</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- TeacherModal -->
+    <div class="modal fade" id="teacherModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Ajout d'un professeur</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label for="teacherEmail" class="form-label">Email</label>
+                            <input type="email" class="form-control emailInput" id="teacherEmail" placeholder="jhondoe@gmail.com">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="teacherPassword" class="form-label">Mot de passe</label>
+                            <input type="text" class="form-control disabled passwordInput" id="teacherPassword" disabled>
+                        </div>
+                        <div class="col-12">
+                            <label for="teacherFirstName" class="form-label">Prénom</label>
+                            <input type="text" class="form-control firstnameInput" id="teacherFirstName" placeholder="Jhon">
+                        </div>
+                        <div class="col-12">
+                            <label for="teacherLastName" class="form-label">Nom</label>
+                            <input type="text" class="form-control lastnameInput" id="teacherLastName" placeholder="Doe">
+                        </div>
+
+                        <div class="col-12">
+                            <label for="inputPromoTeacher" class="form-label">Promo</label>
+                            <select id="inputPromoTeacher" class="form-select" multiple>
+                                {% for promo in promos %}
+                                    <option value="{{ promo.id }}">{{ promo.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn rounded-pill btn-outline-secondary" data-bs-dismiss="modal">Fermer</button>
+                    <button type="button" class="btn rounded-pill btn-outline-salmon" id="addTeacherBtn">Ajouter le professeur</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TeacherModal -->
+    <div class="modal fade" id="adminModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Ajout d'un administrateur</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label for="adminEmail" class="form-label">Email</label>
+                            <input type="email" class="form-control emailInput" id="adminEmail" placeholder="jhondoe@gmail.com">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="adminPassword" class="form-label">Mot de passe</label>
+                            <input type="text" class="form-control disabled passwordInput" id="adminPassword" disabled>
+                        </div>
+                        <div class="col-12">
+                            <label for="adminFirstName" class="form-label">Prénom</label>
+                            <input type="text" class="form-control firstnameInput" id="adminFirstName" placeholder="Jhon">
+                        </div>
+                        <div class="col-12">
+                            <label for="adminLastName" class="form-label">Nom</label>
+                            <input type="text" class="form-control lastnameInput" id="adminLastName" placeholder="Doe">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn rounded-pill btn-outline-secondary" data-bs-dismiss="modal">Fermer</button>
+                    <button type="button" class="btn rounded-pill btn-outline-salmon" id="addAdminBtn">Ajouter l'administrateur</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
